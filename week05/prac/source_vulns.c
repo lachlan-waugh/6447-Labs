@@ -166,10 +166,10 @@ static int get_console_input(char *buf) {
   /* sizeof(buffer) returns 8 bytes! Buffer overflow into buffer*/
   while (fgets(buffer, sizeof(buffer), stdin) != 0) {
     size_t buf_len = strlen(buffer);
-    /* buffer overflow due above bug */
+    /* buffer overflow due to the above bug */
     char *extra = realloc(buf, buf_len + cur_len + 1);
     if (extra == NULL)
-      /* forgotten to free main buffer */
+      /* forgotten to free buffer */
       return -1;
     buf = extra;
     strcpy(buf + cur_len, buffer);
