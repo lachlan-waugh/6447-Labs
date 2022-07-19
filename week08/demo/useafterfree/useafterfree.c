@@ -30,6 +30,7 @@ int main() {
 		empty
 
 		pwndbg> vis_heap_chunks 0x91fa580-8 1
+e have created a fake chunk!
 
 		0x9793578:	0x00000000	0x00000021
 		0x9793580:	0x41414141	0x41414141
